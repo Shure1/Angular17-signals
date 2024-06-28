@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { ProductsService } from '@api/products.service';
 
 @Component({
   selector: 'app-root',
@@ -9,5 +10,7 @@ import { RouterOutlet } from '@angular/router';
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
-  title = 'ecomerce';
+  constructor(private readonly productSvc: ProductsService) {}
+
+  public products$ = this.productSvc.products;
 }
