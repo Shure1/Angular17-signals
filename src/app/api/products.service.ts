@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable, signal } from '@angular/core';
 import { environment } from '@envs/environment.development';
 import { Product } from '@shared/models/product.interface';
+import {toSignal} from '@angular/core/rxjs-interop'
 import { tap } from 'rxjs';
 
 @Injectable({
@@ -16,10 +17,11 @@ export class ProductsService {
   private readonly _endPoint = environment.apiURL;
 
   public getProducts(){
-    this.http.get<Product[]>(`${this._endPoint}?sort=desc`).pipe(tap((data: Product[]) => this.products.set(data))).subscribe();
+    this.http.get<Product[]>(`${this._endPoint}/products/?sort=desc`).pipe(tap((data: Product[]) => this.products.set(data))).subscribe();
   }
 
-  public getProduct(id: number){
-    return this.http.get<Product>(`${this._endPoint}/${id}`);
+  public getProductById(id: number){
+    const product$ = this.http.get<Product>(`${this._endPoint}/products/${id}`);
+    return tosignal
   }
 }
