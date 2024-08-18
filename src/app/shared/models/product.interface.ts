@@ -12,5 +12,5 @@ export interface Product {
   image: string;
   rating:Rating;
   qty:number;
-  subtotal:number;
+  subTotal:number;
 }
