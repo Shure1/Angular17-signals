@@ -42,7 +42,7 @@ export const CartStore = signalStore({providedIn: 'root'},
 })));
 
 const calculateTotalAmount = (products: Product[]): number => {
-  return products.reduce((acc, product) => acc + product.price, 0);
+  return products.reduce((acc, product) => acc + product.price * product.qty, 0);
 }
 
 const calculateTotalCount = (products: Product[]): number => {
